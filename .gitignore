@@ -1,0 +1,16 @@
+*__pycache__/
+*.egg-info/
+*.pyc
+*.pyo
+*.pyd
+*~
+output/*
+prediction/*
+analysis/*
+submit/*
+.envrc
+.ruff_cache
+results/*
+./logs*
+./backup
+./commands*

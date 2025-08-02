@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mecat"
+version = "1.0.0"
+description = "Multi-Expert Chain for Audio Tasks (MECAT)"
+
+dependencies = [
+  "loguru",
+  "accelerate",
+  "numpy<2",
+  "jiwer",
+  "tabulate",
+  "datasets",
+  "librosa",
+  "scikit-learn==1.6.0",
+  "torch==2.2.1",
+  "torchaudio==2.2.1",
+  "torchmetrics==1.6.1",
+  "pandas==2.2.3",
+  "pytorch-ignite==0.5.1",
+  "pyyaml",
+  "soundfile==0.13.1",  
+  "transformers==4.52.4",
+  "tqdm",
+  "webdataset==0.2.100",
+  "sentence_transformers>=4.1",
+  "fense@git+https://github.com/blmoistawinde/fense.git"
+]
+
+authors = [
+  {name = "Yadong Niu",  email = "niuyadong@xiaomi.com"},
+  {name = "Tianzi Wang", email = "twang@se.cuhk.edu.hk"},
+  {name = "Heinrich Dinkel", email = "dinkelheinrich@xiaomi.com"},
+  {name = "Xingwei Sun", email = "sunxingwei@xiaomi.com"},
+  {name = "Jiahao Zhou", email = "zhoukz@bupt.edu.cn"},
+  {name = "Gang Li",     email = "ligang5@xiaomi.com"},
+  {name = "Jizhong Liu", email = "liujizhong1@xiaomi.com"},
+  {name = "Junbo Zhang", email = "zhangjunbo1@xiaomi.com"},
+  {name = "Jian Luan",   email = "luanjian@xiaomi.com"},
+]
+
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+
+[project.scripts]
+mecat-evaluate = "mecat.evaluate:main"
+
+[project.urls]
+Repository = "https://git.n.xiaomi.com/niuyadong/mecat_public.git"
+
+[tool.setuptools.packages.find]
+where = ["src"]
