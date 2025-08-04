@@ -65,7 +65,7 @@ MECAT is a comprehensive benchmark constructed on **large-scale data** to evalua
   </tr>
   <tr>
     <td class="tg-lboi">00A</td>
-    <td class="tg-lboi">generat sound excluding speech and music</td>
+    <td class="tg-lboi">general sound excluding speech and music</td>
     <td class="tg-lboi">837</td>
     <td class="tg-lboi">848</td>
     <td class="tg-lboi">4185</td>
