@@ -503,13 +503,10 @@ score_caption         <NA>   35.2 39.3
 
 **Note**: 
 The formulae of `score_caption`: 
-$$
-S_{\rm caption} =  0.4*\times({S_{\rm long}*0.8 + S_{\rm short}}*0.2) + 0.4\times(S_{\rm speech}*0.6 + S_{\rm music}*0.3 + S_{\rm sound}*0.1) + 0.2\times S_{\rm environment}
-$$
-where $S_{\rm speech}, S_{\rm music}$ and $S_{\rm sound}$ were the average score of pure data and mixed data, e.g.,
-$$
-S_{\rm speech} = 0.5\times S_{\rm speech,pure}+0.5\times S_{\rm speech,mixed}
-$$
+
+$S_{\rm caption} =  0.4\times({0.8S_{\rm long} + 0.2S_{\rm short}}) + 0.4\times(0.6S_{\rm speech} + 0.3S_{\rm music} + 0.1S_{\rm sound}) + 0.2\times S_{\rm environment}$
+
+where $S_{\rm speech}, S_{\rm music}$ and $S_{\rm sound}$ were the average score of pure data and mixed data, e.g., $S_{\rm speech} = \frac{S_{\rm speech,pure}+S_{\rm speech,mixed}}{2}$
 
 
 #### 6.2.3 Audio Question Answering Evaluation
@@ -868,7 +865,7 @@ python -m mecat.evaluate --prediction qa_predictions.csv --task qa --metrics fen
     <td class="tg-0ys1"><span style="background-color:#FFF">29.5</span></td>
   </tr>
   <tr>
-    <td class="tg-0ys1" rowspan="4"><span style="color:#000;background-color:#FFF">LLM-Based</span></td>
+    <td class="tg-0ys1" rowspan="4"><span style="color:#000;background-color:#FFF">LALM</span></td>
     <td class="tg-0ys1"><span style="color:#000;background-color:#FFF">audio-flamingo2</span></td>
     <td class="tg-rcip"><span style="color:#000;background-color:#FFF">43.8</span></td>
     <td class="tg-rcip"><span style="color:#000;background-color:#FFF">43.3</span></td>
@@ -946,7 +943,7 @@ python -m mecat.evaluate --prediction qa_predictions.csv --task qa --metrics fen
 </thead>
 <tbody>
   <tr>
-    <td class="tg-f4yw" rowspan="4"><span style="color:#000;background-color:#FFF">LLM-Based</span></td>
+    <td class="tg-f4yw" rowspan="4"><span style="color:#000;background-color:#FFF">LALM</span></td>
     <td class="tg-f4yw"><span style="color:#000;background-color:#FFF">audio-flamingo2</span></td>
     <td class="tg-f4yw"><span style="color:#000;background-color:#FFF">45.1</span></td>
     <td class="tg-f4yw"><span style="color:#000;background-color:#FFF">46.3</span></td>
