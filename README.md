@@ -10,16 +10,19 @@
 - [4. Tasks](#4-tasks)
   - [4.1 Audio-Captioning](#41-audio-captioning)
   - [4.2 Audio-Question-Answering](#42-audio-question-answering)
-- [5. Evaluation Metrics](#5-evaluation-metrics)
-- [6. Usage](#6-usage)
-  - [6.1 Installation](#61-installation)
-  - [6.2 Quick Start with Qwen2-Audio Example](#62-quick-start-with-qwen2-audio-example)
-  - [6.3 Command Line Evaluation](#63-command-line-evaluation)
-- [7. Results](#7-results)
-- [8. Acknowledgement](#8-acknowledgement)
-- [9. Contributing](#9-contributing)
-- [10. Citation](#10-citation)
-- [11. License](#11-license)
+- [5. Example Data](#5-example-data)
+  - [5.1 Audio Captioning Example (SMA - Speech, Music and General Sound)](#51-audio-captioning-example-sma---speech-music-and-general-sound)
+  - [5.2 Audio Question Answering Example (SMA - Speech, Music and General Sound)](#52-audio-question-answering-example-sma---speech-music-and-general-sound)
+- [6. Evaluation Metrics](#6-evaluation-metrics)
+- [7. Usage](#7-usage)
+  - [7.1 Installation](#71-installation)
+  - [7.2 Quick Start with Qwen2-Audio Example](#72-quick-start-with-qwen2-audio-example)
+  - [7.3 Command Line Evaluation](#73-command-line-evaluation)
+- [8. Results](#8-results)
+- [9. Acknowledgement](#9-acknowledgement)
+- [10. Contributing](#10-contributing)
+- [11. Citation](#11-citation)
+- [12. License](#12-license)
 
 ## 1. Introduction 
 MECAT is a comprehensive benchmark constructed on **large-scale data** to evaluate machine understanding of audio content through two core tasks:
@@ -286,7 +289,71 @@ MECAT is a comprehensive benchmark constructed on **large-scale data** to evalua
   </tr>
 </tbody></table>
 
-## 5. Evaluation Metrics
+## 5. Example Data
+
+### 5.1 Audio Captioning Example (SMA - Speech, Music and General Sound)
+
+The following example shows the comprehensive caption annotations for a single audio sample from the SMA domain. This is the first data sample from the HuggingFace dataset:
+
+**Data Source**: [MECAT-Caption/SMA/Test/test_0000-0000000.tar.gz](https://huggingface.co/datasets/mispeech/MECAT-Caption/tree/main/SMA/test_0000-0000000.tar.gz)
+
+```json
+{
+  "RjRMEFDocEY_78_681_88_681": {
+    "short": [
+      "Energetic electronic music accompanies animated speech with intermittent dog barks and background interference.",
+      "Upbeat instrumental track plays under expressive dialogue and occasional canine vocalizations amid noise.",
+      "Dynamic speech with emotional shifts over electronic music featuring sporadic barking and audio artifacts."
+    ],
+    "long": [
+      "A female voice delivers emotionally varied speech ranging from laughter to frustration, accompanied by rhythmic electronic instrumentation with guitar elements. Occasional dog barks emerge through persistent background static and audio distortion.",
+      "Expressive vocal performance transitions between cheerfulness and intensity, layered over a driving electronic beat with occasional animal sounds and recording imperfections.",
+      "Vivid speech with fluctuating emotional tones interacts with synth-driven musical backing, punctuated by canine noises and low-fidelity artifacts."
+    ],
+    "speech": [
+      "Animated female speech displaying rapid emotional shifts from laughter to frustration.",
+      "Expressive vocal delivery alternating between cheerful and agitated tones.",
+      "Dynamic spoken performance transitioning between amusement and intensity."
+    ],
+    "music": [
+      "Moderate-tempo electronic composition featuring prominent guitar and rhythmic percussion elements.",
+      "Driving synth-based arrangement with guitar accents and steady beat.",
+      "Energetic instrumental track combining electronic textures with rhythmic guitar work."
+    ],
+    "sound": [
+      "Intermittent dog vocalizations amidst persistent electrical interference.",
+      "Occasional canine barks layered over background static.",
+      "Sporadic animal noises punctuating continuous audio distortion."
+    ],
+    "environment": [
+      "Low-quality recording with noticeable background interference and distortion.",
+      "Audio artifacts and electrical noise throughout the recording.",
+      "Persistent static and signal degradation affecting audio clarity."
+    ],
+    "domain": "SMA"
+  }
+}
+```
+
+### 5.2 Audio Question Answering Example (SMA - Speech, Music and General Sound)
+
+The following example shows a QA pair from the SMA domain. This is the first data sample from the HuggingFace dataset:
+
+**Data Source**: [MECAT-QA/SMA/Test/test_0000-0000000.tar.gz](https://huggingface.co/datasets/mispeech/MECAT-QA/tree/main/SMA)
+
+```json
+{
+  "RjRMEFDocEY_78_681_88_681_ffd8b511": {
+    "category": "direct_perception",
+    "difficulty": "basic",
+    "question": "What type of vocal sounds are present?",
+    "answer": "A woman speaking expressively and dog barks.",
+    "domain": "SMA"
+  }
+}
+```
+
+## 6. Evaluation Metrics
 
 MECAT supports multiple evaluation metrics for comprehensive assessment:
 - **Traditional Metrics**: BLEU
@@ -294,19 +361,19 @@ MECAT supports multiple evaluation metrics for comprehensive assessment:
 - **DATE**: Discriminability based Audio Task Evaluation - DATE is particularly effective for audio captioning and question-answering tasks as it considers both the quality of generated text and the model's discriminative capabilities.
 
 
-## 6. Usage
+## 7. Usage
 
-### 6.1 Installation
+### 7.1 Installation
 
 ```bash
 pip install git+https://git.n.xiaomi.com/niuyadong/mecat_public.git
 ```
 
-### 6.2 Quick Start with Qwen2-Audio Example
+### 7.2 Quick Start with Qwen2-Audio Example
 
 This section provides a complete walkthrough of evaluating audio models using MECAT, using Qwen2-Audio as a practical example. The same approach can be adapted for other audio understanding models.
 
-#### 6.2.1 Preliminary Steps: Environment Setup and Model Loading
+#### 7.2.1 Preliminary Steps: Environment Setup and Model Loading
 
 ```python
 import torch
@@ -329,7 +396,7 @@ processor = AutoProcessor.from_pretrained(
 )
 ```
 
-#### 6.2.2 Audio Caption Evaluation
+#### 7.2.2 Audio Caption Evaluation
 
 ##### Step 1: Load MECAT-Caption Dataset
 ```python
@@ -509,7 +576,7 @@ $S_{\rm caption} =  0.4\times({0.8S_{\rm long} + 0.2S_{\rm short}}) + 0.4\times(
 where $S_{\rm speech}, S_{\rm music}$ and $S_{\rm sound}$ were the average score of pure data and mixed data, e.g., $S_{\rm speech} = \frac{S_{\rm speech,pure}+S_{\rm speech,mixed}}{2}$
 
 
-#### 6.2.3 Audio Question Answering Evaluation
+#### 7.2.3 Audio Question Answering Evaluation
 
 ##### Step 1: Load MECAT-QA Dataset
 ```python
@@ -606,11 +673,11 @@ environment_reasoning        18300 42.0 35.5
 the final score is the average scores of all six subtasks
 
 
-### 6.3 Command Line Evaluation
+### 7.3 Command Line Evaluation
 
 You can also use the command line interface for evaluation:
 
-#### 6.3.1 Single File Evaluation
+#### 7.3.1 Single File Evaluation
 
 ```shell
 # Caption evaluation for different audio types (using single dictionary predictions)
@@ -625,7 +692,7 @@ python -m mecat.evaluate --prediction caption_predictions.csv --task caption --s
 python -m mecat.evaluate --prediction caption_predictions.csv --task caption --metrics fense date
 ```
 
-#### 6.3.2 Multi-File Evaluation (Recommended for Caption Task)
+#### 7.3.2 Multi-File Evaluation (Recommended for Caption Task)
 
 For instruction-following models that can generate task-specific captions, you can provide multiple prediction files at once to get comprehensive evaluation results across all caption subtasks:
 
@@ -654,7 +721,7 @@ python -m mecat.evaluate --prediction \
 - ⚠️  **File Order Matters**: Files are mapped to subtasks in order: `long → short → speech → music → sound → environment`
 
 
-#### 6.3.3 QA Task Evaluation
+#### 7.3.3 QA Task Evaluation
 
 ```shell
 # QA evaluation for different question types
@@ -696,10 +763,10 @@ python -m mecat.evaluate --prediction qa_predictions.csv --task qa --metrics fen
   - Single prediction file is sufficient as questions are task-specific.
 
 
-## 7. Results
-### 7.1 Audio-Captioning Task
+## 8. Results
+### 8.1 Audio-Captioning Task
 
-#### 7.1.1 **DATE**
+#### 8.1.1 **DATE**
 
 <table class="tg"><thead>
   <tr>
@@ -809,7 +876,7 @@ python -m mecat.evaluate --prediction qa_predictions.csv --task qa --metrics fen
   </tr>
 </tbody></table>
 
-#### 7.1.2 **FENSE**
+#### 8.1.2 **FENSE**
 
 <table class="tg"><thead>
   <tr>
@@ -919,9 +986,9 @@ python -m mecat.evaluate --prediction qa_predictions.csv --task qa --metrics fen
   </tr>
 </tbody></table>
 
-### 7.2 Audio-Question-Answering 
+### 8.2 Audio-Question-Answering 
 
-#### 7.2.1 **DATE**
+#### 8.2.1 **DATE**
 
 <table class="tg"><thead>
   <tr>
@@ -985,7 +1052,7 @@ python -m mecat.evaluate --prediction qa_predictions.csv --task qa --metrics fen
   </tr>
 </tbody></table>
 
-#### 7.2.2 **FENSE**
+#### 8.2.2 **FENSE**
 
 <table class="tg"><thead>
   <tr>
@@ -1049,17 +1116,17 @@ python -m mecat.evaluate --prediction qa_predictions.csv --task qa --metrics fen
   </tr>
 </tbody></table>
 
-## 8. Acknowledgement
+## 9. Acknowledgement
 
 We have referred to the implementation of FENSE for the evaluation
 
-## 9. Contributing
+## 10. Contributing
 
 [Yadong Niu](https://github.com/nyd3001)`*` · [Tianzi Wang](https://github.com/Jzmo)`*` · [Heinrich Dinkel](https://github.com/RicherMans) · [Xingwei Sun](https://github.com/xingws) · [Jiahao Zhou](https://github.com/zhoukezi) · [Gang Li](https://github.com/GrantL10) · [Jizhong Liu](https://github.com/frankenliu) · [Xunying Liu](https://scholar.google.com/citations?hl=en&user=5_9jk8AAAAAJ&view_op=list_works&sortby=pubdate) · [Junbo Zhang](https://github.com/jimbozhang) · [Jian Luan](https://github.com/jianluan)
 
 `*`: Equal Contribution
 
-## 10. Citation
+## 11. Citation
 ```bibtex
 @article{mecat2025,
   title={MECAT: A Multi-Experts Constructed Benchmark for Fine-Grained Audio Understanding Tasks},
@@ -1069,7 +1136,7 @@ We have referred to the implementation of FENSE for the evaluation
 }
 ```
 
-## 11. License
+## 12. License
 
 The dataset of the project is from the part of ACAV100M undert the **Creative Commons Attribution License 3.0 (CC BY-3.0) license**.
 
